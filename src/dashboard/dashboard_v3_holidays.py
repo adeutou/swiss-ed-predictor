@@ -9,7 +9,7 @@ Sources :
   - Métriques : models/metrics_{24|48|72}h.json
   - SHAP : models/shap_importance_{24|48|72}h.csv
   - Features : models/features_{24|48|72}h.txt
-  - Données : data/sample/spiges_meteo_traffic_joined.csv
+  - Données : data/historical/spiges_meteo_traffic_joined.csv
 
 Lancement :
   streamlit run src/dashboard/app.py
@@ -32,7 +32,7 @@ import streamlit as st
 # ── Paths ──────────────────────────────────────────────────────────
 ROOT      = Path(__file__).resolve().parents[2]
 MODEL_DIR = ROOT / "models"
-DATA_PATH = ROOT / "data" / "sample" / "spiges_meteo_traffic_joined.csv"
+DATA_PATH = ROOT / "data" / "historical" / "spiges_meteo_traffic_joined.csv"
 PLOTS_DIR = MODEL_DIR / "plots"
 
 sys.path.insert(0, str(ROOT))
@@ -739,7 +739,7 @@ if "Prédiction" in view_mode:
 
 elif "historique" in view_mode:
     if df.empty:
-        st.warning("Dataset non disponible — placer `spiges_meteo_traffic_joined.csv` dans `data/sample/`")
+        st.warning("Dataset non disponible — placer `spiges_meteo_traffic_joined.csv` dans `data/historical/`")
         st.stop()
 
     canton_df = df[df["kanton_hospital"] == canton].copy()
